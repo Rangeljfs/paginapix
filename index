@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento - Academia Itapemense de Letras</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --ouro: #c5a059;
+            --azul-escuro: #1a2a44;
+            --creme: #fdfbf7;
+            --texto: #333;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f0eada; /* Cor de fundo suave */
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100 vertical-height;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: var(--creme);
+            max-width: 450px;
+            width: 100%;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            text-align: center;
+            border: 1px solid rgba(197, 160, 89, 0.3);
+            position: relative;
+        }
+
+        /* Detalhe decorativo nas quinas (remetendo ao convite) */
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 10px; left: 10px; right: 10px; bottom: 10px;
+            border: 1px solid var(--ouro);
+            pointer-events: none;
+            border-radius: 10px;
+            opacity: 0.5;
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            color: var(--azul-escuro);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--azul-escuro);
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+        }
+
+        .divider {
+            height: 2px;
+            width: 60px;
+            background-color: var(--ouro);
+            margin: 0 auto 25px;
+        }
+
+        .instrucoes {
+            font-size: 1rem;
+            color: var(--texto);
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .pix-box {
+            background: #f4f4f4;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px dashed var(--ouro);
+            margin-bottom: 20px;
+            word-break: break-all;
+        }
+
+        .pix-key {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: var(--azul-escuro);
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .btn-copiar {
+            background-color: var(--azul-escuro);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+            width: 100%;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn-copiar:hover {
+            background-color: #2c4263;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: #777;
+            font-style: italic;
+        }
+
+        /* Notificação de Copiado */
+        #status {
+            display: none;
+            color: #28a745;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="logo">Academia Itapemense de Letras</div>
+        <div class="divider"></div>
+        
+        <h1>Lançamento de Obras</h1>
+        
+        <p class="instrucoes">
+            Para adquirir os livros dos nossos membros, utilize a chave PIX abaixo. 
+            Apoie a literatura local!
+        </p>
+
+        <div class="pix-box">
+            <span style="font-size: 0.8rem; color: #666; text-transform: uppercase;">Chave PIX (CNPJ/CPF/Celular)</span>
+            <span class="pix-key" id="pixKey">01079319743</span>
+            <button class="btn-copiar" onclick="copiarPix()">COPIAR CHAVE PIX</button>
+            <div id="status">Chave copiada com sucesso!</div>
+        </div>
+
+        <p style="font-size: 0.9rem;"><strong>Valor:</strong> Consulte o valor com o autor ou na mesa de vendas.</p>
+
+        <div class="footer">
+            "Prestigie a literatura de Itapema."
+        </div>
+    </div>
+
+    <script>
+        function copiarPix() {
+            const pixValue = document.getElementById('pixKey').innerText;
+            
+            navigator.clipboard.writeText(pixValue).then(() => {
+                const status = document.getElementById('status');
+                status.style.display = 'block';
+                
+                // Esconde a mensagem após 3 segundos
+                setTimeout(() => {
+                    status.style.display = 'none';
+                }, 3000);
+            }).catch(err => {
+                console.error('Erro ao copiar: ', err);
+            });
+        }
+    </script>
+
+</body>
+</html>
